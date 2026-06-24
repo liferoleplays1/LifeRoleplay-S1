@@ -3,182 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Rp s1 - أفضل العروض</title>
+    <title>Life Rp s1 - المتجر الرسمي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #0a0a0f;
             color: #fff;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-       .header {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            text-align: center;
+        /* Header + 3 Dots Menu */
+        .navbar {
+            background: linear-gradient(90deg, #1a1a2e, #16213e);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 2px solid #00ff88;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             backdrop-filter: blur(10px);
         }
         
-       .header h1 {
-            font-size: 2.5rem;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
             color: #00ff88;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
         }
         
-       .server-info {
+        .menu-btn {
             background: rgba(0, 255, 136, 0.1);
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid #00ff88;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-       .info-box {
-            text-align: center;
-        }
-        
-       .info-box.label {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        
-       .info-box.value {
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            cursor: pointer;
             font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background: #00ff88;
+            color: #000;
+            transform: rotate(90deg);
+        }
+        
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a2e, #0f0f1e);
+            border-left: 2px solid #00ff88;
+            transition: right 0.4s ease;
+            z-index: 2000;
+            padding-top: 80px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sidebar.active { right: 0; }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            display: none;
+        }
+        
+        .sidebar-overlay.active { display: block; }
+        
+        .menu-item {
+            padding: 18px 25px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(0, 255, 136, 0.1);
+            padding-right: 35px;
+            color: #00ff88;
+        }
+        
+        .menu-item.active {
+            background: rgba(0, 255, 136, 0.2);
+            border-right: 4px solid #00ff88;
+            color: #00ff88;
+        }
+        
+        .menu-item i { font-size: 1.3rem; width: 25px; }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Server Info Bar */
+        .server-bar {
+            background: rgba(0, 255, 136, 0.05);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .server-stat {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .server-stat .label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .server-stat .value {
+            font-size: 1.4rem;
             font-weight: bold;
             color: #00ff88;
         }
         
-       .status-online {
-            color: #00ff88!important;
-        }
+        .status-online { color: #00ff88 !important; }
+        .status-offline { color: #ff4444 !important; }
         
-       .status-offline {
-            color: #ff4444!important;
-        }
-        
-       .container {
-            max-width: 1200px;
+        /* Main Content */
+        .container {
+            max-width: 1400px;
             margin: 30px auto;
             padding: 0 20px;
         }
         
-       .tabs {
+        .section-title {
+            font-size: 2rem;
+            color: #00ff88;
+            margin-bottom: 25px;
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
         
-       .tab-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            color: #fff;
-            padding: 12px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
+        .section-title i { font-size: 1.8rem; }
         
-       .tab-btn:hover {
-            background: rgba(0, 255, 136, 0.2);
-            border-color: #00ff88;
-        }
-        
-       .tab-btn.active {
-            background: #00ff88;
-            color: #000;
-            border-color: #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
-        
-       .tab-content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        
-       .tab-content.active {
-            display: block;
-        }
+        .page-content { display: none; animation: fadeIn 0.5s; }
+        .page-content.active { display: block; }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-       .products-grid {
+        /* Products Grid */
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
         
-       .product-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
+        .product-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
         }
         
-       .product-card:hover {
-            transform: translateY(-10px);
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
             border-color: #00ff88;
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3);
         }
         
-       .product-card h3 {
+        .product-card h3 {
             color: #00ff88;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
         }
         
-       .product-card.price {
-            font-size: 2rem;
+        .product-card .price {
+            font-size: 2.2rem;
             font-weight: bold;
             color: #fff;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         
-       .product-card.features {
+        .product-card .features {
             list-style: none;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         
-       .product-card.features li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .product-card .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-       .product-card.features li:before {
+        .product-card .features li:before {
             content: "✓ ";
             color: #00ff88;
             font-weight: bold;
-            margin-left: 8px;
+            margin-left: 10px;
         }
         
-       .buy-btn {
+        .buy-btn {
             display: block;
             width: 100%;
-            background: #00ff88;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
             color: #000;
             text-align: center;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
@@ -187,69 +251,171 @@
             cursor: pointer;
         }
         
-       .buy-btn:hover {
-            background: #00cc6a;
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.5);
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.5);
         }
         
-       .footer {
+        /* Chat Players Section */
+        .chat-container {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .player-chat {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-right: 3px solid #00ff88;
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+        
+        .player-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .player-info { flex: 1; }
+        .player-name { color: #00ff88; font-weight: bold; margin-bottom: 5px; }
+        .player-msg { color: #ccc; font-size: 0.95rem; }
+        .player-time { color: #666; font-size: 0.8rem; margin-top: 5px; }
+        
+        .footer {
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(0, 255, 136, 0.3);
-            color: #aaa;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 2px solid rgba(0, 255, 136, 0.2);
+            color: #666;
         }
         
         @media (max-width: 768px) {
-           .header h1 { font-size: 1.8rem; }
-           .tab-btn { padding: 10px 20px; font-size: 1rem; }
+            .logo { font-size: 1.4rem; }
+            .sidebar { width: 280px; right: -280px; }
+            .section-title { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🔥 Life Rp s1 🔥</h1>
-        <p>أفضل سيرفر رول بلاي في المغرب</p>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="closeMenu()"></div>
+    
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">🔥 Life Rp s1</div>
+        <button class="menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
     </div>
     
-    <div class="server-info">
-        <div class="info-box">
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-menu" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="menu-item active" onclick="showPage('home')">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </div>
+        <div class="menu-item" onclick="showPage('cars')">
+            <i class="fas fa-car"></i>
+            <span>السيارات</span>
+        </div>
+        <div class="menu-item" onclick="showPage('money')">
+            <i class="fas fa-dollar-sign"></i>
+            <span>الفلوس</span>
+        </div>
+        <div class="menu-item" onclick="showPage('vip')">
+            <i class="fas fa-crown"></i>
+            <span>VIP</span>
+        </div>
+        <div class="menu-item" onclick="showPage('gangs')">
+            <i class="fas fa-users"></i>
+            <span>العصابات</span>
+        </div>
+        <div class="menu-item" onclick="showPage('players')">
+            <i class="fas fa-comments"></i>
+            <span>Chat Players</span>
+        </div>
+    </div>
+    
+    <!-- Server Info -->
+    <div class="server-bar">
+        <div class="server-stat">
             <div class="label">IP السيرفر</div>
             <div class="value">188.127.241.74:4110</div>
         </div>
-        <div class="info-box">
-            <div class="label">اللاعبين المتصلين</div>
-            <div class="value" id="players-count">--</div>
+        <div class="server-stat">
+            <div class="label">اللاعبين</div>
+            <div class="value" id="players-count">--/64</div>
         </div>
-        <div class="info-box">
+        <div class="server-stat">
             <div class="label">الحالة</div>
-            <div class="value" id="server-status">جاري التحميل...</div>
+            <div class="value" id="server-status">جاري...</div>
         </div>
     </div>
     
+    <!-- Main Content -->
     <div class="container">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'cars')">🚗 السيارات</button>
-            <button class="tab-btn" onclick="openTab(event, 'money')">💰 الفلوس</button>
-            <button class="tab-btn" onclick="openTab(event, 'accounts')">👤 الحسابات</button>
-            <button class="tab-btn" onclick="openTab(event, 'vip')">⭐ VIP</button>
+        <!-- Home Page -->
+        <div id="home" class="page-content active">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                مرحبا بك في Life Rp s1
+            </h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3>🎉 عروض خاصة</h3>
+                    <div class="price">خصم 50%</div>
+                    <ul class="features">
+                        <li>على جميع السيارات VIP</li>
+                        <li>صالح حتى نهاية الشهر</li>
+                        <li>تسليم فوري</li>
+                    </ul>
+                    <button class="buy-btn" onclick="showPage('cars')">شوف العروض</button>
+                </div>
+                <div class="product-card">
+                    <h3>👑 أفضل سيرفر</h3>
+                    <div class="price">+500 لاعب</div>
+                    <ul class="features">
+                        <li>أقوى رول بلاي فالمغرب</li>
+                        <li>إدارة 24/7</li>
+                        <li>أحداث يومية</li>
+                    </ul>
+                    <button class="buy-btn" onclick="window.open('https://discord.gg/liferp')">ديسكورد</button>
+                </div>
+            </div>
         </div>
         
-        <!-- قسم السيارات -->
-        <div id="cars" class="tab-content active">
+        <!-- Cars Page -->
+        <div id="cars" class="page-content">
+            <h2 class="section-title"><i class="fas fa-car"></i> السيارات</h2>
             <div class="products-grid">
                 <div class="product-card">
                     <h3>Bugatti Chiron</h3>
                     <div class="price">150 درهم</div>
                     <ul class="features">
                         <li>أسرع سيارة فالسيرفر</li>
-                        <li>تعديل كامل</li>
+                        <li>تعديل كامل مجاني</li>
                         <li>لوحة مميزة</li>
                         <li>تسليم فوري</li>
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري Bugatti Chiron" class="buy-btn">شراء الآن</a>
                 </div>
-                
                 <div class="product-card">
                     <h3>Lamborghini Aventador</h3>
                     <div class="price">120 درهم</div>
@@ -261,23 +427,12 @@
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري Lamborghini" class="buy-btn">شراء الآن</a>
                 </div>
-                
-                <div class="product-card">
-                    <h3>باك 5 سيارات</h3>
-                    <div class="price">300 درهم</div>
-                    <ul class="features">
-                        <li>5 سيارات من اختيارك</li>
-                        <li>توفير 40%</li>
-                        <li>تعديل مجاني</li>
-                        <li>تسليم فوري</li>
-                    </ul>
-                    <a href="https://wa.me/212600000000?text=بغيت نشري باك 5 سيارات" class="buy-btn">شراء الآن</a>
-                </div>
             </div>
         </div>
         
-        <!-- قسم الفلوس -->
-        <div id="money" class="tab-content">
+        <!-- Money Page -->
+        <div id="money" class="page-content">
+            <h2 class="section-title"><i class="fas fa-dollar-sign"></i> الفلوس</h2>
             <div class="products-grid">
                 <div class="product-card">
                     <h3>1 مليون</h3>
@@ -289,7 +444,6 @@
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري 1 مليون" class="buy-btn">شراء الآن</a>
                 </div>
-                
                 <div class="product-card">
                     <h3>5 مليون</h3>
                     <div class="price">200 درهم</div>
@@ -300,77 +454,24 @@
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري 5 مليون" class="buy-btn">شراء الآن</a>
                 </div>
-                
-                <div class="product-card">
-                    <h3>10 مليون</h3>
-                    <div class="price">350 درهم</div>
-                    <ul class="features">
-                        <li>أفضل عرض</li>
-                        <li>توفير 30%</li>
-                        <li>هدية: سيارة مجانية</li>
-                    </ul>
-                    <a href="https://wa.me/212600000000?text=بغيت نشري 10 مليون" class="buy-btn">شراء الآن</a>
-                </div>
             </div>
         </div>
         
-        <!-- قسم الحسابات -->
-        <div id="accounts" class="tab-content">
+        <!-- VIP Page -->
+        <div id="vip" class="page-content">
+            <h2 class="section-title"><i class="fas fa-crown"></i> VIP</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <h3>حساب لفل 100</h3>
-                    <div class="price">250 درهم</div>
-                    <ul class="features">
-                        <li>لفل 100 جاهز</li>
-                        <li>5 مليون كاش</li>
-                        <li>3 سيارات VIP</li>
-                        <li>منزل فاخر</li>
-                    </ul>
-                    <a href="https://wa.me/212600000000?text=بغيت نشري حساب لفل 100" class="buy-btn">شراء الآن</a>
-                </div>
-                
-                <div class="product-card">
-                    <h3>حساب تاجر مخدرات</h3>
-                    <div class="price">400 درهم</div>
-                    <ul class="features">
-                        <li>رخصة تجارة كاملة</li>
-                        <li>مختبر جاهز</li>
-                        <li>10 مليون كاش</li>
-                        <li>سيارة مصفحة</li>
-                    </ul>
-                    <a href="https://wa.me/212600000000?text=بغيت نشري حساب تاجر" class="buy-btn">شراء الآن</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- قسم VIP -->
-        <div id="vip" class="tab-content">
-            <div class="products-grid">
-                <div class="product-card">
-                    <h3>VIP برونزي</h3>
-                    <div class="price">100 درهم/شهر</div>
-                    <ul class="features">
-                        <li>تاق مميز فالشات</li>
-                        <li>2 مليون كل أسبوع</li>
-                        <li>دخول السيرفر ملي يكون عامر</li>
-                        <li>سيارة VIP واحدة</li>
-                    </ul>
-                    <a href="https://wa.me/212600000000?text=بغيت نشري VIP برونزي" class="buy-btn">اشترك الآن</a>
-                </div>
-                
                 <div class="product-card">
                     <h3>VIP ذهبي</h3>
                     <div class="price">250 درهم/شهر</div>
                     <ul class="features">
-                        <li>كل مميزات البرونزي</li>
+                        <li>تاق مميز فالشات</li>
                         <li>5 مليون كل أسبوع</li>
                         <li>3 سيارات VIP</li>
                         <li>منزل مجاني</li>
-                        <li>أوامر خاصة</li>
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري VIP ذهبي" class="buy-btn">اشترك الآن</a>
                 </div>
-                
                 <div class="product-card">
                     <h3>VIP ماسي</h3>
                     <div class="price">500 درهم/شهر</div>
@@ -378,10 +479,38 @@
                         <li>كل مميزات الذهبي</li>
                         <li>10 مليون كل أسبوع</li>
                         <li>5 سيارات VIP</li>
-                        <li>منزل + شركة</li>
                         <li>دعم مباشر 24/7</li>
                     </ul>
                     <a href="https://wa.me/212600000000?text=بغيت نشري VIP ماسي" class="buy-btn">اشترك الآن</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gangs Page -->
+        <div id="gangs" class="page-content">
+            <h2 class="section-title"><i class="fas fa-users"></i> العصابات</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3>إنشاء عصابة</h3>
+                    <div class="price">300 درهم</div>
+                    <ul class="features">
+                        <li>اسم ولون خاص</li>
+                        <li>مقر خاص</li>
+                        <li>مخزن أسلحة</li>
+                        <li>10 أعضاء</li>
+                    </ul>
+                    <a href="https://wa.me/212600000000?text=بغيت ننشئ عصابة" class="buy-btn">اشتري الآن</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Players Page -->
+        <div id="players" class="page-content">
+            <h2 class="section-title"><i class="fas fa-comments"></i> Chat Players - اللاعبين المتصلين</h2>
+            <div class="chat-container" id="players-list">
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                    <p style="margin-top: 15px;">جاري تحميل قائمة اللاعبين...</p>
                 </div>
             </div>
         </div>
@@ -389,52 +518,81 @@
     
     <div class="footer">
         <p>© 2026 Life Rp s1 - جميع الحقوق محفوظة</p>
-        <p>للتواصل: واتساب 0600000000 | ديسكورد: discord.gg/liferp</p>
+        <p>واتساب: 0600000000 | ديسكورد: discord.gg/liferp</p>
     </div>
     
     <script>
-        // كود تبديل الأقسام Tabs
-        function openTab(evt, tabName) {
-            let i, tabcontent, tabbtns;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
-            tabbtns = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tabbtns.length; i++) {
-                tabbtns[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        // Menu Functions
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
         }
         
-        // كود جلب عدد اللاعبين من السيرفر
+        function closeMenu() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.querySelector('.sidebar-overlay').classList.remove('active');
+        }
+        
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Remove active from menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            // Mark menu item as active
+            event.currentTarget.classList.add('active');
+            closeMenu();
+            window.scrollTo(0, 0);
+        }
+        
+        // Server Info + Players List
         async function updateServerInfo() {
             const ip = '188.127.241.74:4110';
             try {
-                // جلب معلومات السيرفر
                 const infoRes = await fetch(`http://${ip}/info.json`);
                 const info = await infoRes.json();
                 
-                // جلب عدد اللاعبين
                 const playersRes = await fetch(`http://${ip}/players.json`);
                 const players = await playersRes.json();
                 
+                // Update stats
                 document.getElementById('players-count').textContent = `${players.length}/${info.vars.sv_maxClients}`;
                 document.getElementById('server-status').textContent = 'متصل ✅';
                 document.getElementById('server-status').className = 'value status-online';
                 
+                // Update Chat Players List
+                const playersList = document.getElementById('players-list');
+                if (players.length === 0) {
+                    playersList.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">لا يوجد لاعبين متصلين حالياً</div>';
+                } else {
+                    playersList.innerHTML = players.map((player, index) => `
+                        <div class="player-chat">
+                            <div class="player-avatar">${player.name.charAt(0).toUpperCase()}</div>
+                            <div class="player-info">
+                                <div class="player-name">${player.name}</div>
+                                <div class="player-msg">ID: ${player.id} | Ping: ${player.ping}ms</div>
+                                <div class="player-time">متصل الآن</div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
             } catch (error) {
-                document.getElementById('players-count').textContent = '--';
+                document.getElementById('players-count').textContent = '--/64';
                 document.getElementById('server-status').textContent = 'غير متصل ❌';
                 document.getElementById('server-status').className = 'value status-offline';
+                document.getElementById('players-list').innerHTML = '<div style="text-align: center; padding: 40px; color: #ff4444;">تعذر الاتصال بالسيرفر</div>';
             }
         }
         
-        // شغل الكود أول مرة
         updateServerInfo();
-        // عاود كل 30 ثانية
         setInterval(updateServerInfo, 30000);
     </script>
 </body>
-                      </html>
+                </html>
